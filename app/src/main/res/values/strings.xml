@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MarlieskePsetFinal</string>
+    <string name="or_go_to_playlist">Or go to Playlist</string>
+    <string name="load">LOAD</string>
+    <string name="go">GO</string>
+    <string name="search_for_your_favourite_songs_or_go_to_playlist">Search for your favourite songs, or go to playlist!</string>
+    <string name="password">password</string>
+</resources>
