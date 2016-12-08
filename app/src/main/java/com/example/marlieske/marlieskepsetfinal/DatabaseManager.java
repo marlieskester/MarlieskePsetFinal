@@ -16,11 +16,11 @@ import static android.content.ContentValues.TAG;
 
 public class DatabaseManager {
     DatabaseReference myRef;
-    public void WriteToList(){
+    public void WriteToList(PlayListActivity.Song song, String title){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
+        myRef.child("songs").child(title).setValue(song);
 
-        myRef.setValue("Hello, World!");
     }
 
     public void ReadList(){
@@ -28,10 +28,11 @@ public class DatabaseManager {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
+                String returnsongs = null;
+                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                    returnsongs = returnsongs + myRef.child("songs").orderByChild("title");
+                }
+
             }
 
             @Override
@@ -40,6 +41,10 @@ public class DatabaseManager {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public void DeleteSong(String title){
+        myRef.child("songs").child(title).removeValue();
     }
 
 
