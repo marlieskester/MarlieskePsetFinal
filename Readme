@@ -1,0 +1,7 @@
+Application allows users to search for songs and add them to a personal list.
+Data flow:
+Keyword entered in main, using Asynctask and HTTPmanager data is retrieved using the keyword. 
+This will be displayed in foundsongsactivity using resultListAdapter, which includes an onclick listener.
+This listener opens another activity with information on the song, a button to get extra informatiion and a button to add or remove from list.
+This final activity has not been tested yet, and will be improved the following days.
+Signup and login drafts are added, but not yet used in the application itself.
