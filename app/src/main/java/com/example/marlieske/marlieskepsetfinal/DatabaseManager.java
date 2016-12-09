@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -16,11 +18,15 @@ import static android.content.ContentValues.TAG;
 
 public class DatabaseManager {
     DatabaseReference myRef;
-    public void WriteToList(PlayListActivity.Song song, String title){
+    ArrayList returnsongs;
+    public void WriteToList(Song song, String title){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         myRef = database.getReference("message");
-        myRef.child("songs").child(title).setValue(song);
 
+    }
+
+    public void WritetoList(String title, Song song){
+        myRef.child("songs").child(title).setValue(song);
     }
 
     public void ReadList(){
@@ -28,11 +34,10 @@ public class DatabaseManager {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String returnsongs = null;
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-                    returnsongs = returnsongs + myRef.child("songs").orderByChild("title");
+                returnsongs = null;
+                for (DataSnapshot songsnapshot: dataSnapshot.getChildren()) {
+                    returnsongs.add(myRef.child("songs").orderByChild("title"));
                 }
-
             }
 
             @Override
@@ -41,6 +46,10 @@ public class DatabaseManager {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public ArrayList ReturnSongs(){
+        return returnsongs;
     }
 
     public void DeleteSong(String title){

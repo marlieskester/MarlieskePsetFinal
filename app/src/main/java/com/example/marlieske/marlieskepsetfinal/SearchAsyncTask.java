@@ -3,6 +3,7 @@ package com.example.marlieske.marlieskepsetfinal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -37,6 +38,7 @@ public class SearchAsyncTask extends AsyncTask<Object, Void, String>{
         if (result.equals("")) {
             Toast.makeText(context,"Sorry, does not exist", Toast.LENGTH_SHORT).show();
         } else {
+            Log.d("result", result);
             Intent toListOfSongs = new Intent(context, ListofSongsActivity.class);
             toListOfSongs.putExtra("result", result);
             toListOfSongs.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -39,7 +39,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/or_go_to_playlist"/>
+        android:text="@string/or_go_to_playlist"
+        android:layout_below="@id/ETKeyWord"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

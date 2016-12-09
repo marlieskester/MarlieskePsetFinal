@@ -3,6 +3,7 @@ package com.example.marlieske.marlieskepsetfinal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,17 +23,18 @@ import java.util.HashMap;
  * Created by Marlieske on 6-12-2016.
  */
 
-public class ListAdapter extends ArrayAdapter{
+public class ResultListAdapter extends ArrayAdapter<Song>{
     JSONObject result;
     Context context;
-    public ListAdapter(Context context, int resource) {
-        super(context, resource);
+    ArrayList<Song> songs;
+    public ResultListAdapter(Context context, int resource, ArrayList<Song> songs) {
+        super(context, resource, songs);
+        this.songs = songs;
+        this.context = context;
     }
 
+    @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        MainActivity activity = new MainActivity();
-        ListofSongsActivity list = new ListofSongsActivity();
-        String results = list.returnresult();
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.foundsongs, null);
@@ -40,25 +43,24 @@ public class ListAdapter extends ArrayAdapter{
         final TextView TVArtist = (TextView) convertView.findViewById(R.id.artist);
         final TextView TVTitle = (TextView) convertView.findViewById(R.id.title);
 
-        try {
-            JSONObject jsonwholething = new JSONObject(results);
-            JSONArray jsonsongs = (JSONArray) jsonwholething.get("track");
-            result = jsonsongs.getJSONObject(position);
-            TVArtist.setText(result.getString("artist"));
-            TVTitle.setText(result.getString("name"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        final Song song = songs.get(position);
+        TVArtist.setText(song.artist);
+        TVTitle.setText(song.title);
 
         TVTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectedSong = new Intent(context, PlayListActivity.class);
-                selectedSong.putExtra("song", (Parcelable) result);
+                Log.d("onclick", "works");
+                Intent selectedSong = new Intent(context, SongInfoActivity.class);
+                selectedSong.putExtra("songnumber", getCount());
+                selectedSong.putExtra("stringofsongs", songs);
                 context.startActivity(selectedSong);
             }
         });
         return convertView;
     }
-
+    public int getCount(){
+        Log.d("getcount", ""+songs.size());
+        return songs.size();
+    }
 }
