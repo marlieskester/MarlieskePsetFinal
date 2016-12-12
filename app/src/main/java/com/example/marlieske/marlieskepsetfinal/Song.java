@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Marlieske on 9-12-2016.
  */
 
-public class Song implements Serializable {
+public class Song implements Parcelable {
     String title;
     String artist;
     String albuminfo;

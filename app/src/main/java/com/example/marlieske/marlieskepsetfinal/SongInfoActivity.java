@@ -34,9 +34,15 @@ public class SongInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_info);
-        Intent selectedSong = getIntent();
-        Bundle data = selectedSong.getExtras();
-        song = data.getParcelable("song");
+
+        if (savedInstanceState != null){
+            song = savedInstanceState.getParcelable("song");
+        }
+        else {
+            Intent selectedSong = getIntent();
+            Bundle data = selectedSong.getExtras();
+            song = data.getParcelable("song");
+        }
         Log.d("oncreate", song.toString());
         getSong(song);
     }
@@ -47,17 +53,12 @@ public class SongInfoActivity extends AppCompatActivity {
         TextView TVArtist = (TextView) findViewById(R.id.SIArtist);
         TextView TVTitle = (TextView) findViewById(R.id.SITitle);
         ImageView Album = (ImageView) findViewById(R.id.Albumimage);
-//        URI uri = null;
-//        try {
-//            uri = new URI(song.albumimage);
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//        }
-//        Album.setImageURI(uri);
+        new DownloadImage(Album).execute(song.albumimage);
         TVArtist.setText(song.artist);
         TVTitle.setText(song.title);
     }
 
+    // load webpage on buttonclick
     public void loadInfo(View view) {
         URLstring = song.albuminfo;
         try {
@@ -69,23 +70,36 @@ public class SongInfoActivity extends AppCompatActivity {
         }
     }
 
+    // add or remove from list on buttonclick
     public void AddOrRemove(View view) {
         Button addRemove = (Button) findViewById(R.id.listbtn);
+        // load list
         DatabaseManager manager = new DatabaseManager();
         manager.ReadList();
+        // if list contains song, offer delete option
         if (manager.returnsongs.contains(song)) {
-            addRemove.setText("Remove from playlist");
+            addRemove.setText(R.string.remove_list);
             manager.DeleteSong(song.title);
+            // after deletion, go to main
             Intent toMain = new Intent(this, MainActivity.class);
             startActivity(toMain);
             finish();
         }
+        //else, offer add option
         else{
-            addRemove.setText("Add to Playlist");
+            addRemove.setText(R.string.add_list);
             manager.WriteToList(song, song.title);
+            // after addition, go to list
             Intent toPlayList = new Intent(this, PlayListActivity.class);
             startActivity(toPlayList);
             finish();
         }
+    }
+
+    // if activity is killed, save current state
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putParcelable("song", song);
+        super.onSaveInstanceState(savedInstanceState);
     }
 }

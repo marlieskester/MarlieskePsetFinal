@@ -22,8 +22,13 @@ public class ListofSongsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listof_songs);
         // get list of songs
-        Intent toListOfSongs = getIntent();
-        result = toListOfSongs.getStringExtra("result");
+        if (savedInstanceState != null){
+            result = savedInstanceState.getString("result");
+        }
+        else {
+            Intent toListOfSongs = getIntent();
+            result = toListOfSongs.getStringExtra("result");
+        }
         DisplaySongList();
     }
 
@@ -35,5 +40,11 @@ public class ListofSongsActivity extends AppCompatActivity {
         ListView LVItems = (ListView) findViewById(R.id.LVSongs);
         ResultListAdapter adapter = new ResultListAdapter(this, R.layout.foundsongs, songs);
         LVItems.setAdapter(adapter);
+    }
+
+    // if activity is killed, save current state
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putString("result", result);
+        super.onSaveInstanceState(savedInstanceState);
     }
 }

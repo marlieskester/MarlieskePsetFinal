@@ -10,4 +10,6 @@
     <string name="ETPW1">Password</string>
     <string name="ETPW2">confirm password</string>
     <string name="username">username</string>
+    <string name="remove_list">Remove from playlist</string>
+    <string name="add_list">Add to Playlist</string>
 </resources>
