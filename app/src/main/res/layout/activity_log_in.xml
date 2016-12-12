@@ -9,25 +9,46 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marlieske.marlieskepsetfinal.LogInActivity">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/WelcomeString"
+        android:id="@+id/TVWelocome"
+        android:textSize="24dp"/>
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="user@email.com"
-        android:id="@+id/ETMail"/>
+        android:id="@+id/ETMail"
+        android:layout_below="@+id/TVWelocome"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:id="@+id/ETPassword"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword"
+        android:layout_below="@+id/ETMail"/>
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="signIn"/>
+        android:text="Sign in"
+        android:onClick="toMain"
+        android:id="@+id/sgninBTN"
+        android:layout_below="@+id/ETPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:onClick="toSignUp"
+        android:layout_below="@+id/sgninBTN"
+         />
 
 </RelativeLayout>

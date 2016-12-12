@@ -10,10 +10,59 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marlieske.marlieskepsetfinal.SignupActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/TVSUText"
+        android:text="Sign up for FREE
+        Pick a username and password, and start Browsing!"
+        android:textSize="24dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/username"
+        android:id="@+id/ETUName"
+        android:layout_below="@+id/TVSUText"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/ETPW1"
+        android:inputType="textPassword"
+        android:id="@+id/ETPW1"
+        android:layout_below="@+id/ETMailSU"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/ETPW2"
+        android:inputType="textPassword"
+        android:id="@+id/ETPW2"
+        android:layout_below="@+id/ETPW1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="user@email.com"
-        android:id="@+id/ETMail"/>
+        android:id="@+id/ETMailSU"
+        android:layout_below="@+id/ETUName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up"
+        android:onClick="signUp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/ETPW2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

@@ -3,6 +3,11 @@
     <string name="or_go_to_playlist">Or go to Playlist</string>
     <string name="load">LOAD</string>
     <string name="go">GO</string>
-    <string name="search_for_your_favourite_songs_or_go_to_playlist">Search for your favourite songs, or go to playlist!</string>
+    <string name="search_songs_or_playlist">Search for your favourite songs, or go to playlist!</string>
     <string name="password">password</string>
+    <string name="WelcomeString">Welcome to BrowseFM! Create an account and browse through millions of tracks.</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="ETPW1">Password</string>
+    <string name="ETPW2">confirm password</string>
+    <string name="username">username</string>
 </resources>

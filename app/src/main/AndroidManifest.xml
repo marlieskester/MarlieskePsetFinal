@@ -18,10 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".PlayListActivity" />
-        <activity android:name=".DisplaySongActivity" />
         <activity android:name=".ListofSongsActivity" />
         <activity android:name=".LogInActivity" />
-        <activity android:name=".AnonymousAuthActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".SongInfoActivity"></activity>
     </application>

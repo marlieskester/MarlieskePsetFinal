@@ -21,46 +21,59 @@ import java.util.HashMap;
 
 /**
  * Created by Marlieske on 6-12-2016.
+ * ResultListadapter adapts arraylists to fit a listview.
+ * Is called on by either ListofSongs or PlayList, provides an onclick to SongInfoActivity
  */
 
 public class ResultListAdapter extends ArrayAdapter<Song>{
-    JSONObject result;
+
     Context context;
     ArrayList<Song> songs;
+
+    // constructor
     public ResultListAdapter(Context context, int resource, ArrayList<Song> songs) {
         super(context, resource, songs);
         this.songs = songs;
         this.context = context;
     }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent){
 
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent){
+
+        // if no line in listview is available, make a new one
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.foundsongs, null);
         }
 
+        // find textviews
         final TextView TVArtist = (TextView) convertView.findViewById(R.id.artist);
         final TextView TVTitle = (TextView) convertView.findViewById(R.id.title);
 
+        // add text to textview
         final Song song = songs.get(position);
         TVArtist.setText(song.artist);
         TVTitle.setText(song.title);
 
+        // onclick pass Song song to next activity
         TVTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("onclick", "works");
                 Intent selectedSong = new Intent(context, SongInfoActivity.class);
-                selectedSong.putExtra("songnumber", getCount());
-                selectedSong.putExtra("stringofsongs", songs);
+                Song thisOne = songs.get(position);
+                String artist = thisOne.artist;
+                String title = thisOne.title;
+                String albuminfo = thisOne.albuminfo;
+                String albumimage = thisOne.albumimage;
+
+                selectedSong.putExtra("song", new Song(title, artist, albuminfo, albumimage));
                 context.startActivity(selectedSong);
             }
         });
         return convertView;
     }
+
     public int getCount(){
-        Log.d("getcount", ""+songs.size());
         return songs.size();
     }
 }
