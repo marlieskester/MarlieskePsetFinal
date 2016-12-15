@@ -6,6 +6,23 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
     </style>
+
+    <style name="LastFMBased" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:textViewStyle">@style/TextAppearance.AppCompat.Headline</item>
+        <item name="android:textAppearanceSmall">@style/TextAppearance.AppCompat.SearchResult.Subtitle</item>
+        <item name="colorButtonNormal">@color/accent_material_dark</item>
+        <item name="android:textColorHint">@android:color/primary_text_dark</item>
+    </style>
+
+    <style name="TVArtist" parent="LastFMBased">
+        <item name="textViewStyle">@style/TextAppearance.AppCompat.Subtitle</item>
+    </style>
+
+    <style name="Title" parent="LastFMBased">
+        <item name="textViewStyle">@style/TextAppearance.AppCompp</item>
+    </style>
+
 
 </resources>

@@ -29,10 +29,12 @@ public class JSONExtractor {
 
         try {
             // get to the parts where songs are written
-            JSONObject jsonwholething = new JSONObject(allresults);
-            JSONObject jresults = (JSONObject) jsonwholething.get("results");
-            JSONObject jattr = (JSONObject) jresults.get("trackmatches");
-            JSONArray jsonsongs = (JSONArray) jattr.get("track");
+//            JSONObject jsonwholething = new JSONObject(allresults);
+//            JSONObject jresults = (JSONObject) jsonwholething.get("results");
+//            JSONObject jattr = (JSONObject) jresults.get("trackmatches");
+            JSONArray jsonsongs = new JSONArray(allresults);
+
+
 
             for (int i = 0; i < jsonsongs.length(); i++){
                 // for all songs, extract info from JSONArray, put in one song, add song to arraylist.

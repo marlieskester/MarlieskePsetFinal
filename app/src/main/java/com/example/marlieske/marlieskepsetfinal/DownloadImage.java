@@ -20,6 +20,7 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
     }
     @Override
     protected Bitmap doInBackground(String... urls) {
+        Log.d("downloadimg", urls[0]);
         String url = urls[0];
         Bitmap mIcon = null;
         try {

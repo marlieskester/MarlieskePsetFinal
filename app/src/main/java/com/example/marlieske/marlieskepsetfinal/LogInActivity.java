@@ -88,4 +88,19 @@ public class LogInActivity extends AppCompatActivity {
         Intent toSignUp = new Intent(this, SignupActivity.class);
         startActivity(toSignUp);
     }
+
+    // if activity is killed, save current state
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("mail", email);
+        savedInstanceState.putString("key", password);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        String email = savedInstanceState.getString("mail");
+        String password = savedInstanceState.getString("key");
+    }
 }

@@ -46,16 +46,6 @@
         android:layout_alignParentEnd="true" />
 
     <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/SITitle"
-        android:layout_below="@+id/Albumimage"
-        android:layout_alignLeft="@+id/SIArtist"
-        android:layout_alignStart="@+id/SIArtist"
-        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title" />
-
-    <TextView
         android:text="artist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,4 +57,24 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"/>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SITitle"
+        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+        android:layout_marginTop="86dp"
+        android:layout_below="@+id/Albumimage"
+        android:layout_alignLeft="@+id/SIArtist"
+        android:layout_alignStart="@+id/SIArtist" />
+
+    <TextView
+        android:text="Browse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Browse"
+        android:textSize="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

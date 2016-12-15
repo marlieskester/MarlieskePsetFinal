@@ -43,8 +43,16 @@ public class ListofSongsActivity extends AppCompatActivity {
     }
 
     // if activity is killed, save current state
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
-        savedInstanceState.putString("result", result);
         super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putString("result", result);
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        String result = savedInstanceState.getString("result");
+
     }
 }

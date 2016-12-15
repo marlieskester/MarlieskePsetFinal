@@ -6,6 +6,10 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Marlieske on 6-12-2016.
  * SearchAsynctask is called upon from main, uses HTTPRequesthelper and launches ListofSongs.
@@ -44,8 +48,19 @@ public class SearchAsyncTask extends AsyncTask<Object, Void, String>{
 
         // else pass result on to ListofSongs
         else {
+            JSONArray jsonsongs = new JSONArray();
+            try {
+                JSONObject jsonwholething = new JSONObject(result);
+                JSONObject jresults = (JSONObject) jsonwholething.get("results");
+                JSONObject jattr = (JSONObject) jresults.get("trackmatches");
+                jsonsongs = (JSONArray) jattr.get("track");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
             Intent toListOfSongs = new Intent(context, ListofSongsActivity.class);
-            toListOfSongs.putExtra("result", result);
+            toListOfSongs.putExtra("result", jsonsongs.toString());
             toListOfSongs.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(toListOfSongs);
         }
