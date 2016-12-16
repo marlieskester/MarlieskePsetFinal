@@ -9,18 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 /**
  * LoginActivity made by Marlieske Doorn, based on Firebase login.
@@ -32,32 +24,40 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LogInActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    String email;
-    String password;
+    private String mEMail;
+    private String mPassword;
+    EditText mail;
+    EditText key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         mAuth = FirebaseAuth.getInstance();
+        mail = (EditText) findViewById(R.id.ETMail);
+        key = (EditText) findViewById(R.id.ETPassword);
+        if (savedInstanceState != null){
+            mEMail = savedInstanceState.getParcelable("mail");
+            mPassword = savedInstanceState.getParcelable("key");
+            mail.setText(mEMail);
+            key.setText(mPassword);
+        }
     }
 
-    // on buttonclick, login and go to main
+    /** on buttonclick, login and go to main */
     public void toMain(View view) {
         // get mail and password form edittext
-        EditText mail = (EditText) findViewById(R.id.ETMail);
-        EditText key = (EditText) findViewById(R.id.ETPassword);
-        email = mail.getText().toString();
-        password = key.getText().toString();
+        mEMail = mail.getText().toString();
+        mPassword = key.getText().toString();
 
         // if either is empty, notify user
-        if (email.equals("") || password.equals("")){
+        if (mEMail.equals("") || mPassword.equals("")){
             Toast.makeText(this, "Please enter mail and password", Toast.LENGTH_SHORT).show();
         }
 
         // else, sign in
         else {
-            mAuth.signInWithEmailAndPassword(email, password)
+            mAuth.signInWithEmailAndPassword(mEMail, mPassword)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,18 +83,18 @@ public class LogInActivity extends AppCompatActivity {
                 }
     }
 
-    // or go to signup activity (buttonclick)
+    /** or go to signup activity (buttonclick) */
     public void toSignUp(View view) {
         Intent toSignUp = new Intent(this, SignupActivity.class);
         startActivity(toSignUp);
     }
 
-    // if activity is killed, save current state
+    /** if activity is killed, save current state */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putString("mail", email);
-        savedInstanceState.putString("key", password);
+        savedInstanceState.putString("mail", mEMail);
+        savedInstanceState.putString("key", mPassword);
     }
 
     @Override
@@ -102,5 +102,6 @@ public class LogInActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         String email = savedInstanceState.getString("mail");
         String password = savedInstanceState.getString("key");
+
     }
 }

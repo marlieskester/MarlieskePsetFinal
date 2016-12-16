@@ -25,14 +25,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DatabaseManager manager = new DatabaseManager();
         manager.getUserInfo();
-        String mail = manager.getMail();
+        String mail = manager.mEmail;
         TextView welcome = (TextView) findViewById(R.id.welcome);
-        welcome.setText("Signed in as " + mail);
+        welcome.setText(getString(R.string.signed_in) + mail);
     }
 
-    // load songs based on keyword search
+    /** load songs based on keyword search */
     public void loadSongs(View view) {
-        // retrieve keyword
         EditText ETKeyWord = (EditText) findViewById(R.id.ETKeyWord);
         String Keyword = ETKeyWord.getText().toString();
 
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //  or on buttonclick go to playlist
+    /**  or on buttonclick go to playlist */
     public void toPlayList(View view) {
         Intent toPlayLisy = new Intent(this, PlayListActivity.class);
         startActivity(toPlayLisy);
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    /** Onclick, load toptracks using other HTTPrequest */
     public void loadtop(View view) {
         AsyncTask songAsyncTask = new SearchAsyncTask(this);
         songAsyncTask.execute("Ikzoektoptracks");

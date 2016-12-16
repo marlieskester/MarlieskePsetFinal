@@ -12,4 +12,12 @@
     <string name="username">username</string>
     <string name="remove_list">Remove from playlist</string>
     <string name="add_list">Add to Playlist</string>
+    <string name="signed_in">"Signed in as "</string>
+    <string name="browse">Browse</string>
+    <string name="add_to_list">Add to list</string>
+    <string name="check_what_s_hot">Check what\'s hot</string>
+    <string name="sign_out">Sign out</string>
+    <string name="song">Song</string>
+    <string name="def_mail">user@email.com</string>
+    <string name="login_description">Sign up for FREE Pick a username and password, and start Browsing!</string>
 </resources>

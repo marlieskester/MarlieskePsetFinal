@@ -22,18 +22,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/ETPW2"
-        android:inputType="textPassword"
-        android:id="@+id/ETPW2"
-        android:layout_below="@+id/ETPW1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,8 +57,20 @@
         android:layout_height="wrap_content"
         android:hint="@string/def_mail"
         android:id="@+id/ETMailSU"
+        android:inputType="textEmailAddress"
         android:layout_below="@+id/TVSUText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:inputType="textEmailAddress" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/ETPW2"
+        android:inputType="textPassword"
+        android:id="@+id/ETPW2"
+        android:layout_below="@+id/ETPW1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

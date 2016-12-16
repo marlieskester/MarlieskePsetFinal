@@ -17,13 +17,13 @@ import java.net.URL;
 public class HTTPRequestHelper {
     public static String executeRequest(Object Keyword){
         String result = "";
-        URL link = null;
+        URL link;
         try {
+            // if toptracks is clicked, use this URL
             if (Keyword.equals("Ikzoektoptracks")){
                 link = new URL("http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=cc8ee82a7433b3f018502d19a22cf173&format=json");
-            }
-            else {
-                // build URL using API key and keyword
+            } else {
+                // else build URL using API key and keyword
                 link = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + Keyword + "&api_key=cc8ee82a7433b3f018502d19a22cf173&format=json");
             }
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
@@ -32,7 +32,6 @@ public class HTTPRequestHelper {
             if (ResponseCode >= 300 && ResponseCode <= 200) {
                 // if responsecode shows error, get errorstream
                 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                Log.d("responseCode.if", br.toString());
                 return String.valueOf(br);
             } else {
                 // else copy information to result
@@ -44,7 +43,6 @@ public class HTTPRequestHelper {
                 }
             }
         } catch (IOException e) {
-            // if something goes wrong: show error.
             e.printStackTrace();
         }
         return result;

@@ -24,42 +24,6 @@
         <!--android:layout_alignParentEnd="true"-->
         <!--android:onClick="loadInfo"/>-->
 
-    <Button
-        android:text="@string/add_to_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/listbtn"
-        android:layout_marginBottom="122dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="AddOrRemove"/>
-
-    <TextView
-        android:text="artist"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="33dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="12dp"
-        android:id="@+id/SIArtist"
-        android:layout_below="@+id/SITitle"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        style="@style/TVArtist"/>
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/SITitle"
-        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
-        android:layout_marginTop="86dp"
-        android:layout_alignLeft="@+id/SIArtist"
-        android:layout_alignStart="@+id/SIArtist" />
-
     <TextView
         android:text="@string/browse"
         android:layout_width="wrap_content"
@@ -68,4 +32,41 @@
         android:textSize="50sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SITitle"
+        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/add_to_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listbtn"
+        android:onClick="AddOrRemove"
+        android:layout_above="@+id/Browse"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SIArtist"
+        style="@style/TVArtist"
+        android:layout_below="@+id/SITitle"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

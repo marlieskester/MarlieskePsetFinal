@@ -3,12 +3,7 @@ package com.example.marlieske.marlieskepsetfinal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by Marlieske on 6-12-2016.
@@ -17,62 +12,37 @@ import org.json.JSONObject;
  */
 
 public class SearchAsyncTask extends AsyncTask<Object, Void, String>{
-    Context context;
-    MainActivity activity;
+    private Context mContext;
+    private MainActivity mActivity;
 
-    // constructor
+    /** constructor */
     public SearchAsyncTask(MainActivity activity){
-        this.activity = activity;
-        this.context = this.activity.getApplicationContext();
+        this.mActivity = activity;
+        this.mContext = this.mActivity.getApplicationContext();
     }
 
-    // executes HTTPrequest, returns URL
+    /** executes HTTPrequest, returns URL */
     @Override
     protected String doInBackground(Object... params) {
         return HTTPRequestHelper.executeRequest(params[0]);
     }
 
-    // displays message to indicate start search
+    /** displays message to indicate start search */
     @Override
     protected void onPreExecute() {
-        Toast.makeText(context, "Loading your songs", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "Loading your songs", Toast.LENGTH_SHORT).show();
     }
 
-    // handles result
+    /** passes result to next activity */
     @Override
     protected void onPostExecute(String result) {
-        // if no result, tell user
         if (result.equals("")) {
-            Toast.makeText(context,"Sorry, no songs found", Toast.LENGTH_SHORT).show();
-        }
-
-        // else pass result on to ListofSongs
-        else {
-            JSONArray jsonsongs = new JSONArray();
-            JSONObject jsonwholething = new JSONObject();
-            try {
-                jsonwholething = new JSONObject(result);
-                JSONObject jresults = (JSONObject) jsonwholething.get("results");
-                JSONObject jattr = (JSONObject) jresults.get("trackmatches");
-                jsonsongs = (JSONArray) jattr.get("track");
-            } catch (JSONException e) {
-                // dan maar helemaal hier uitpakken
-                try {
-                    JSONObject alljsonsongs = (JSONObject) jsonwholething.get("tracks");
-                    jsonsongs = (JSONArray) alljsonsongs.get("track");
-                } catch (JSONException e1) {
-                    e1.printStackTrace();
-                }
-
-
-                e.printStackTrace();
-            }
-
-
-            Intent toListOfSongs = new Intent(context, ListofSongsActivity.class);
-            toListOfSongs.putExtra("result", jsonsongs.toString());
+            Toast.makeText(mContext,"Sorry, no songs found", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent toListOfSongs = new Intent(mContext, ListofSongsActivity.class);
+            toListOfSongs.putExtra("result", result);
             toListOfSongs.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(toListOfSongs);
+            mContext.startActivity(toListOfSongs);
         }
     }
 

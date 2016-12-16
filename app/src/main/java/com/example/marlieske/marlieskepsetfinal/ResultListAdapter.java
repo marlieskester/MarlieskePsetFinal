@@ -27,14 +27,16 @@ import java.util.HashMap;
 
 public class ResultListAdapter extends ArrayAdapter<Song>{
 
-    Context context;
-    ArrayList<Song> songs;
+    private Context context;
+    private ArrayList<Song> songs;
+    private String classname;
 
     // constructor
-    public ResultListAdapter(Context context, int resource, ArrayList<Song> songs) {
+    public ResultListAdapter(Context context, int resource, ArrayList<Song> songs, String classname) {
         super(context, resource, songs);
         this.songs = songs;
         this.context = context;
+        this.classname = classname;
     }
 
 
@@ -67,6 +69,7 @@ public class ResultListAdapter extends ArrayAdapter<Song>{
                 String albumimage = thisOne.albumimage;
 
                 selectedSong.putExtra("song", new Song(title, artist, albuminfo, albumimage));
+                selectedSong.putExtra("sender", classname);
                 context.startActivity(selectedSong);
             }
         });

@@ -16,54 +16,58 @@ import java.util.ArrayList;
  */
 
 public class JSONExtractor {
-    String allresults;
+    private String mResults;
 
-    //constructor
+    /** constructor */
     public JSONExtractor(String results){
-        this.allresults = results;
+        this.mResults = results;
     }
 
-    // extractor
+    /** extracts info from JSON */
     public ArrayList getSongs(){
         ArrayList songs = new ArrayList();
-
+        JSONArray jsonsongs = new JSONArray();
+        JSONObject jsonwholething = new JSONObject();
         try {
-            // get to the parts where songs are written
-//            JSONObject jsonwholething = new JSONObject(allresults);
-//            JSONObject jresults = (JSONObject) jsonwholething.get("results");
-//            JSONObject jattr = (JSONObject) jresults.get("trackmatches");
-            JSONArray jsonsongs = new JSONArray(allresults);
-
-
-            for (int i = 0; i < jsonsongs.length(); i++){
-                // for all songs, extract info from JSONArray, put in one song, add song to arraylist.
-                try {
-                    JSONObject result = jsonsongs.getJSONObject(i);
-                    String artist = result.getString("artist");
-                    if (artist.contains("name")) {
-                        try {
-                            JSONObject artistjson = (JSONObject) result.get("artist");
-                            artist = artistjson.getString("name");
-                        }
-                        catch (JSONException e){
-                            Log.d("Extractor", "name");
-                        }
-                    }
-                    String albumimage = result.getString("image");
-                    String albuminfo = result.getString("url");
-                    String title = result.getString("name");
-                    Song song = new Song(title, artist, albuminfo, albumimage);
-                    Log.d("adapter", result.getString("artist"));
-                    songs.add(song);
-                } catch (JSONException e) {
-                    Log.d("exception", "too bad");
-                    e.printStackTrace();
-                }
-            }
+            jsonwholething = new JSONObject(mResults);
+            JSONObject jresults = (JSONObject) jsonwholething.get("results");
+            JSONObject jattr = (JSONObject) jresults.get("trackmatches");
+            jsonsongs = (JSONArray) jattr.get("track");
         } catch (JSONException e) {
-            e.printStackTrace();
+            // if get top tracks is used, there's an other format
+            try {
+                JSONObject alljsonsongs = (JSONObject) jsonwholething.get("tracks");
+                jsonsongs = (JSONArray) alljsonsongs.get("track");
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
         }
 
-    return songs;
+        for (int i = 0; i < jsonsongs.length(); i++){
+            // for all songs, extract info from JSONArray, put in one song, add song to arraylist.
+            try {
+                JSONObject result = jsonsongs.getJSONObject(i);
+                String artist = result.getString("artist");
+                if (artist.contains("name")) {
+                    try {
+                        // again, for top tracks another format
+                        JSONObject artistjson = (JSONObject) result.get("artist");
+                        artist = artistjson.getString("name");
+                    } catch (JSONException e){
+                        Log.d("Extractor", "toptracksartist");
+                        e.printStackTrace();
+                    }
+                }
+                String albumimage = result.getString("image");
+                String albuminfo = result.getString("url");
+                String title = result.getString("name");
+                Song song = new Song(title, artist, albuminfo, albumimage);
+                songs.add(song);
+            } catch (JSONException e) {
+                Log.d("exception", "tracksinfo");
+                e.printStackTrace();
+            }
+        }
+        return songs;
     }
 }

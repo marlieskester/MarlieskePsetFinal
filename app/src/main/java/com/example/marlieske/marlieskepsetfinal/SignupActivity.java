@@ -28,6 +28,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
     }
 
+    /**Signs up new user by extracting text and call create account */
     public void signUp(View view) {
         // find text typed by user
         EditText ETMail = (EditText) findViewById(R.id.ETMailSU);
@@ -56,22 +57,17 @@ public class SignupActivity extends AppCompatActivity {
             startActivity(tomain);
         }
     }
+
+    /** creates account in firebase */
     public void createAccount(String email, String password) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d("TAG", "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Toast.makeText(SignupActivity.this, "Login not successful", Toast.LENGTH_SHORT).show();
                         }
-
-
                     }
                 });
     }

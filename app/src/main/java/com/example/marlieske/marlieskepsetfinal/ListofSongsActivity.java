@@ -32,17 +32,16 @@ public class ListofSongsActivity extends AppCompatActivity {
         DisplaySongList();
     }
 
+    /** Connects Arralylist to adapter*/
     public void DisplaySongList(){
-        // extract songs
         JSONExtractor ex = new JSONExtractor(result);
         ArrayList<Song> songs = ex.getSongs();
-        // Load listview
         ListView LVItems = (ListView) findViewById(R.id.LVSongs);
-        ResultListAdapter adapter = new ResultListAdapter(this, R.layout.foundsongs, songs);
+        ResultListAdapter adapter = new ResultListAdapter(this, R.layout.foundsongs, songs, "ListofSongs");
         LVItems.setAdapter(adapter);
     }
 
-    // if activity is killed, save current state
+    /** if activity is killed, save current state */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState){
         super.onSaveInstanceState(savedInstanceState);

@@ -11,45 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.marlieske.marlieskepsetfinal.MainActivity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="loadSongs"
-        android:text="@string/load"
-        android:layout_below="@+id/TVBasic"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/loadBTN"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/go"
-        android:onClick="toPlayList"
-        android:layout_below="@+id/topBTN"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:id="@+id/button2" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/lastfm"
-        android:id="@+id/imageView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_songs_or_playlist"
-        android:id="@+id/TVBasic"
-        android:layout_marginTop="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:text="@string/browse"
         android:layout_width="wrap_content"
@@ -58,16 +19,6 @@
         android:textSize="50sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TVArtist"
-        android:text="fdsafd"
-        android:id="@+id/welcome"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -90,25 +41,6 @@
         android:layout_alignRight="@+id/Browse"
         android:layout_alignEnd="@+id/Browse" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/load"
-        android:onClick="loadtop"
-        android:id="@+id/topBTN"
-        android:layout_below="@+id/loadBTN"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/or_go_to_playlist"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,6 +48,73 @@
         android:id="@+id/toptracks"
         android:layout_alignBaseline="@+id/topBTN"
         android:layout_alignBottom="@+id/topBTN"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_songs_or_playlist"
+        android:id="@+id/TVBasic"
+        android:layout_below="@+id/Browse"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="loadSongs"
+        android:text="@string/load"
+        android:id="@+id/loadBTN"
+        android:layout_below="@+id/TVBasic"
+        android:layout_toLeftOf="@+id/imageView"
+        android:layout_toStartOf="@+id/imageView"
+        android:layout_marginRight="56dp"
+        android:layout_marginEnd="56dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/load"
+        android:onClick="loadtop"
+        android:id="@+id/topBTN"
+        android:layout_below="@+id/ETKeyWord"
+        android:layout_alignLeft="@+id/loadBTN"
+        android:layout_alignStart="@+id/loadBTN" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/lastfm"
+        android:id="@+id/imageView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or_go_to_playlist"
+        android:layout_below="@+id/topBTN"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/go"
+        android:onClick="toPlayList"
+        android:id="@+id/button2"
+        android:layout_below="@+id/topBTN"
+        android:layout_alignLeft="@+id/topBTN"
+        android:layout_alignStart="@+id/topBTN" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/TVArtist"
+        android:id="@+id/welcome"
+        android:layout_below="@+id/button2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

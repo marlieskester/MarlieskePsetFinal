@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Marlieske on 9-12-2016.
+ * Class Song implements parcelable. Song contains Artist, image, link to information and title,
+ *
  */
 
 public class Song implements Parcelable {
@@ -19,9 +21,7 @@ public class Song implements Parcelable {
     String albuminfo;
     String albumimage;
 
-    public Song(){}
-
-    //Constructor
+    /**Constructor*/
     public Song(String title, String artist, String albuminfo, String albumimage) {
         this.title = title;
         this.artist = artist;
@@ -29,23 +29,13 @@ public class Song implements Parcelable {
         this.albumimage = albumimage;
     }
 
+    public Song(){}
+
     public void setTitle(String title){
         this.title = title;
     }
 
-    public void setArtist(String artist){
-        this.artist = artist;
-    }
-
-    public void setAlbuminfo(String Albuminfo){
-        this.albuminfo = Albuminfo;
-    }
-
-    public void setAlbumimage(String AlbumImage){
-        this.albumimage = albumimage;
-    }
-
-    public Song(Parcel in) {
+    private Song(Parcel in) {
         String[] data = new String[4];
         in.readStringArray(data);
         this.title = data[0];
@@ -75,29 +65,3 @@ public class Song implements Parcelable {
         }
     };
 }
-//    FirebaseDatabase database = FirebaseDatabase.getInstance();
-//    DatabaseReference myRef = database.getReference();
-//
-//myRef.addChildEventListener(new ChildEventListener() {
-//@Override
-//public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-//        Song newSong = dataSnapshot.getValue(Song.class);
-//        songs.add(newSong);
-//        }
-//@Override
-//public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//        }
-//
-//@Override
-//public void onChildRemoved(DataSnapshot dataSnapshot) {
-//        }
-//
-//@Override
-//public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//        }
-//
-//@Override
-//public void onCancelled(DatabaseError databaseError) {
-//        }
-//        });

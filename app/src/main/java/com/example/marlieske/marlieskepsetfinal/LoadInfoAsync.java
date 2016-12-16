@@ -9,25 +9,25 @@ import java.net.URLConnection;
 
 /**
  * Created by Marlieske on 13-12-2016.
+ * Class would open webpage containing more information on the song, but I couldn't fix the final bug :(
  */
 
 public class LoadInfoAsync extends AsyncTask<String, Object, URLConnection> {
-    URLConnection newConnection = null;
+    private URLConnection mNewConnection = null;
 
-    public LoadInfoAsync(){
+    public LoadInfoAsync(){}
 
-    }
     @Override
     protected URLConnection doInBackground(String... urls) {
 
         try {
             URL url = new URL(urls[0]);
-            newConnection = url.openConnection();
+            mNewConnection = url.openConnection();
         } catch (IOException e) {
             e.printStackTrace();
             Log.d("loadinfo", "catch");
         }
-        return newConnection;
+        return mNewConnection;
     }
 
     protected void onPostExecute(URLConnection newConnection){

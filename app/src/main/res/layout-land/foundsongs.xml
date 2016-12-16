@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:text="artist"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/artist"
+        style="@style/TVArtist"
+        android:layout_alignBottom="@+id/title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/artist"
+        android:layout_toStartOf="@+id/artist" />
+</RelativeLayout>
