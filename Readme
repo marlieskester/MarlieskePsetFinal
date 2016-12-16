@@ -2,6 +2,18 @@ Application allows users to search for songs and add them to a personal list.
 Data flow:
 Keyword entered in main, using Asynctask and HTTPmanager data is retrieved using the keyword. 
 This will be displayed in foundsongsactivity using resultListAdapter, which includes an onclick listener.
-This listener opens another activity with information on the song, a button to get extra informatiion and a button to add or remove from list.
-This final activity has not been tested yet, and will be improved the following days.
-Signup and login drafts are added, but not yet used in the application itself.
+This listener opens another activity with information on the song, (a button to get extra information) and a button to add or remove from list.
+"Add" will be shown when the screen is accesed through browsing or get-top-tracks, while when accessed from playlist it will beset to "delete".
+
+Extra option: Get top so-many songs. 
+
+Would have done:
+Since my listview handles the onclick function, no finish() is called, so the back navigation is not too wonderful.
+Firebase database rules are set on public, because for some reason this was the only way to get data to the database.
+Preferably, this would have been set to "private".
+There is one function I couldn't get to work, but I left it in the project because I think I was pretty close. I
+It would be connected to a button so that the user would be able to get more information on the song by going to a webpage.
+
+Overall, I am happy with the result. I have edited the layout to match last-FM, and I have tried to style my code according to the reference.
+
+
