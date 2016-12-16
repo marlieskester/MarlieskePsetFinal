@@ -17,10 +17,15 @@ import java.net.URL;
 public class HTTPRequestHelper {
     public static String executeRequest(Object Keyword){
         String result = "";
+        URL link = null;
         try {
-            // build URL using API key and keyword
-            URL link = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + Keyword + "&api_key=cc8ee82a7433b3f018502d19a22cf173&format=json");
-
+            if (Keyword.equals("Ikzoektoptracks")){
+                link = new URL("http://ws.audioscrobbler.com/2.0/?method=chart.gettoptracks&api_key=cc8ee82a7433b3f018502d19a22cf173&format=json");
+            }
+            else {
+                // build URL using API key and keyword
+                link = new URL("http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + Keyword + "&api_key=cc8ee82a7433b3f018502d19a22cf173&format=json");
+            }
             HttpURLConnection connection = (HttpURLConnection) link.openConnection();
             Integer ResponseCode = connection.getResponseCode();
 

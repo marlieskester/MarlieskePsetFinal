@@ -49,12 +49,22 @@ public class SearchAsyncTask extends AsyncTask<Object, Void, String>{
         // else pass result on to ListofSongs
         else {
             JSONArray jsonsongs = new JSONArray();
+            JSONObject jsonwholething = new JSONObject();
             try {
-                JSONObject jsonwholething = new JSONObject(result);
+                jsonwholething = new JSONObject(result);
                 JSONObject jresults = (JSONObject) jsonwholething.get("results");
                 JSONObject jattr = (JSONObject) jresults.get("trackmatches");
                 jsonsongs = (JSONArray) jattr.get("track");
             } catch (JSONException e) {
+                // dan maar helemaal hier uitpakken
+                try {
+                    JSONObject alljsonsongs = (JSONObject) jsonwholething.get("tracks");
+                    jsonsongs = (JSONArray) alljsonsongs.get("track");
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
+                }
+
+
                 e.printStackTrace();
             }
 

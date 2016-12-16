@@ -37,22 +37,82 @@ public class PlayListActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference();
         songs = new ArrayList<>();
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot songSnapShot: dataSnapshot.getChildren()) {
-                    Log.d("playlistadded", "" + dataSnapshot.getChildren());
-//                    String title = (String) songSnapShot.child("title").getValue();
-//                    dataSnapshot.getValue();
-//                    Song newsong = new Song();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        manager.ReadList();
+//        String uid = manager.getUserInfo();
+//        myRef = database.getReference(uid);
+//        myRef.addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//               // returnsongs = new ArrayList<>();
+//                int i = 0;
+//                String title = null, artist = null, info = null, image = null;
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    Song other = dataSnapshot.getValue(Song.class);
+////                    if (i % 4 == 0) {
+////                        info = other.toString();
+////                    }
+////                    else if (i % 4 == 1) {
+////                        image = other.toString();
+////                    }
+////                    else if (i % 4 == 2) {
+////                        artist = other.toString();
+////                    }
+////                    else {
+////                        title = other.toString();
+////                    }
+//                    //Song lastTry = new Song(title, artist, info, image);
+//                    songs.add(other);
+//                    i ++;
+//                    Song song = dataSnapshot.getValue(Song.class);
+////                    Song tryAgain = snapshot.child(other.toString()).getValue(Song.class);
+//                    Object value = dataSnapshot.getValue();
+//
+//
+//                    // Song thisone = dataSnapshot.child(songmap.toString()).getValue(Song.class);
+//                    Log.d("r", "" + other);
+//                   // Log.d("read", ""+lastTry);
+//                    //  Log.d("read", "" + value);
+//                    // Log.d("readlist", "" + song.artist);
+//                }
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//        myRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot songSnapShot: dataSnapshot.getChildren()) {
+//                    Song news = songSnapShot.getValue(Song.class);
+//                    Log.d("playlistadded", news.toString());
+////                    String title = (String) songSnapShot.child("title").getValue();
+////                    dataSnapshot.getValue();
+//                    songs.add(news);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
 //        myRef.addChildEventListener(new ChildEventListener() {
 //            @Override
 //            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
@@ -87,8 +147,8 @@ public class PlayListActivity extends AppCompatActivity {
 //            public void onCancelled(DatabaseError databaseError) {
 //            }
  //       });
-         //   manager.ReadList();
-        //DisplaySongList();
+     //   manager.ReadList();
+        DisplaySongList();
     }
     
 //    private ArrayList<Song> ParseSongs(String s)
@@ -110,7 +170,7 @@ public class PlayListActivity extends AppCompatActivity {
 
     // load info from databasemanager, put information in listview.
     public void DisplaySongList(){
-        //ArrayList songs = manager.ReturnSongs();
+        songs = manager.ReturnSongs();
         Log.d("Playlist", ""+ songs);
         ListView LVItems = (ListView) findViewById(R.id.LVPlaylist);
         ResultListAdapter adapter = new ResultListAdapter(this, R.layout.foundsongs, songs);

@@ -35,12 +35,20 @@ public class JSONExtractor {
             JSONArray jsonsongs = new JSONArray(allresults);
 
 
-
             for (int i = 0; i < jsonsongs.length(); i++){
                 // for all songs, extract info from JSONArray, put in one song, add song to arraylist.
                 try {
                     JSONObject result = jsonsongs.getJSONObject(i);
                     String artist = result.getString("artist");
+                    if (artist.contains("name")) {
+                        try {
+                            JSONObject artistjson = (JSONObject) result.get("artist");
+                            artist = artistjson.getString("name");
+                        }
+                        catch (JSONException e){
+                            Log.d("Extractor", "name");
+                        }
+                    }
                     String albumimage = result.getString("image");
                     String albuminfo = result.getString("url");
                     String title = result.getString("name");

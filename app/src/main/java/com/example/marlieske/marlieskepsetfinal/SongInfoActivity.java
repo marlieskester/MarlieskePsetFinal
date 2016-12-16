@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Made be Marlieske Doorn
  * Is called from ListAdapter (onclick), shows information about song.
@@ -25,6 +27,8 @@ public class SongInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_info);
+        manager = new DatabaseManager();
+        manager.ReadList();
 
         if (savedInstanceState != null){
             song = savedInstanceState.getParcelable("song");
@@ -34,10 +38,20 @@ public class SongInfoActivity extends AppCompatActivity {
             Bundle data = selectedSong.getExtras();
             song = data.getParcelable("song");
         }
-        manager = new DatabaseManager();
-        manager.ReadList();
-        Log.d("oncreate", ""+song);
+        Log.d("info", ""+manager.ReturnSongs());
         getSong(song);
+        Button addRemove = (Button) findViewById(R.id.listbtn);
+        ArrayList returnsongs = manager.ReturnSongs();
+        Log.d("retsngs", ""+returnsongs);
+        if (returnsongs == null){
+            addRemove.setText(R.string.add_list);
+        }
+        else if (returnsongs.contains(song)){
+            addRemove.setText(R.string.add_list);
+        }
+        else {
+            addRemove.setText(R.string.remove_list);
+        }
     }
 
     // show songinfo
@@ -46,7 +60,7 @@ public class SongInfoActivity extends AppCompatActivity {
         TextView TVArtist = (TextView) findViewById(R.id.SIArtist);
         TextView TVTitle = (TextView) findViewById(R.id.SITitle);
         ImageView Album = (ImageView) findViewById(R.id.Albumimage);
-        new DownloadImage(Album).execute(song.albuminfo);
+        //new DownloadImage(Album).execute(song.albuminfo);
         TVArtist.setText(song.artist);
         TVTitle.setText(song.title);
     }
@@ -61,17 +75,8 @@ public class SongInfoActivity extends AppCompatActivity {
 
     // add or remove from list on buttonclick
     public void AddOrRemove(View view) {
-        String uid = manager.getUserInfo();
-        if (uid.equals("")){
-            Log.d("AddOrRemove", "no user");
-        }
-        else {
-            Log.d("uid", uid);
-            Button addRemove = (Button) findViewById(R.id.listbtn);
-            //DatabaseManager manager = new DatabaseManager();
             // if list contains song, offer delete option
-            if (manager.returnsongs == null || !manager.returnsongs.contains(song)) {
-                addRemove.setText(R.string.add_list);
+            if (manager.ReturnSongs() == null || ! manager.ReturnSongs().contains(song)) {
                 manager.WriteToList(song, song.title);
                 // after addition, go to list
                 Intent toPlayList = new Intent(this, PlayListActivity.class);
@@ -80,39 +85,13 @@ public class SongInfoActivity extends AppCompatActivity {
             }
             //else, offer add option
             else {
-                addRemove.setText(R.string.remove_list);
                 manager.DeleteSong(song.title);
                 // after deletion, go to main
                 Intent toMain = new Intent(this, MainActivity.class);
                 startActivity(toMain);
                 finish();
             }
-        }
     }
-
-//    // Read from the database, return all songs savd by this user
-//    public void ReadList(){
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        final DatabaseReference myRef = database.getReference();
-//        myRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                ArrayList returnsongs = null;
-//                for (DataSnapshot songsnapshot: dataSnapshot.getChildren()) {
-//                    returnsongs.add(myRef.child("songs").orderByChild("title"));
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError error) {
-//                // if failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
-//                PlayListActivity activity = new PlayListActivity();
-//                activity.ErrorLoading();
-//            }
-//        });
-//    }
-
 
     // if activity is killed, save current state
     @Override

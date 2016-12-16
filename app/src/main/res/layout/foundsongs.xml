@@ -22,6 +22,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/artist"
         android:layout_toRightOf="@+id/title"
-        android:textAppearance="@style/TVArtist"
+        style="@style/TVArtist"
         android:layout_alignParentTop="true" />
 </RelativeLayout>

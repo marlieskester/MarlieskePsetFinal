@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * MainActivity made by Marlieske Doorn
@@ -20,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabaseManager manager = new DatabaseManager();
+        manager.getUserInfo();
+        String mail = manager.getMail();
+        TextView welcome = (TextView) findViewById(R.id.welcome);
+        welcome.setText("Signed in as " + mail);
     }
 
     // load songs based on keyword search
@@ -46,4 +54,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(toPlayLisy);
     }
 
+    public void signout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent toLogin = new Intent(this, LogInActivity.class);
+        startActivity(toLogin);
+        finish();
+    }
+
+    public void loadtop(View view) {
+        AsyncTask songAsyncTask = new SearchAsyncTask(this);
+        songAsyncTask.execute("Ikzoektoptracks");
+    }
 }
